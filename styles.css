@@ -39,6 +39,13 @@
   --radius-sm: 8px;
   --radius-xs: 6px;
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== 状态色（契约 §9.8 IRON RULE，值不可更改） ===== */
+  --status-running:   #2f6feb;   /* 蓝 */
+  --status-paused:    #d97706;   /* 橙 */
+  --status-completed: #16a34a;   /* 绿 */
+  --status-abandoned: #6b7280;   /* 灰 */
+  --status-error:     #dc2626;   /* 红 */
 }
 
 body {
@@ -1272,3 +1279,569 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ============================================================
+   v1.1 新增：键盘可达性、首页仪表盘、状态徽章、Toast、弹窗
+   （契约 §9.7 / §9.8）
+   ============================================================ */
+
+/* ===== 键盘可达性：可见焦点环（契约 §9.7） =====
+   IRON RULE：不设 tabindex="-1"，保持自然 Tab 顺序；
+   所有可聚焦元素必须有一致的 :focus-visible 焦点环。 */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.titlebar .titlebar-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -3px;
+}
+
+.sidebar :focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* ===== 按钮禁用态（.is-disabled 与 :disabled 等价） ===== */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled,
+.btn-back:disabled,
+.btn-new-sop:disabled,
+.btn-add-step:disabled,
+.btn-favorite-toggle:disabled,
+.toggle-btn:disabled,
+.chip:disabled,
+.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary:disabled,
+.btn-danger:disabled,
+.is-disabled.btn-secondary,
+.is-disabled.btn-danger {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-tertiary);
+}
+
+/* ===== 顶部工具区（首页 Phase 4：搜索 + 新建 + 导入 + 导出） ===== */
+.dash-header { align-items: flex-start; flex-wrap: wrap; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.header-actions .search-box input { width: 260px; }
+
+/* ===== 从备份恢复提示条 ===== */
+.recovery-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: var(--warning-bg);
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  color: #92400e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recovery-banner svg { flex-shrink: 0; }
+.recovery-text { flex: 1; }
+
+.btn-dismiss-recovery {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: #92400e;
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.btn-dismiss-recovery:hover { background: rgba(146, 64, 14, 0.12); }
+
+/* ===== 首页分区（契约 §9.7 .dash-section / .dash-section-header） ===== */
+.dash-section { margin-bottom: 32px; }
+
+.dash-section:last-child { margin-bottom: 8px; }
+
+.dash-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.dash-section-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-section-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.dash-list { display: flex; flex-direction: column; }
+
+.empty-state-compact { padding: 28px 20px; }
+.empty-state-compact svg { width: 40px; height: 40px; }
+
+/* ===== 工具条：筛选胶囊 + 下拉 ===== */
+.dash-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-secondary);
+  border-radius: 18px;
+  padding: 3px;
+}
+
+.chip {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition);
+}
+
+.chip:hover { color: var(--text); background: rgba(255,255,255,0.7); }
+
+.chip.active {
+  background: var(--card-bg);
+  color: var(--primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.select-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.select-label { color: var(--text-tertiary); font-weight: 500; }
+
+.select-wrap select,
+.form-group select {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--card-bg);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition);
+}
+
+.select-wrap select:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== 收藏开关 / 收藏按钮 ===== */
+.btn-favorite-toggle {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition);
+}
+
+.btn-favorite-toggle:hover {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.btn-favorite-toggle.active,
+.btn-favorite-toggle[aria-pressed="true"] {
+  background: var(--warning-bg);
+  border-color: var(--warning);
+  color: #b45309;
+}
+
+.btn-favorite-toggle.active svg,
+.btn-favorite-toggle[aria-pressed="true"] svg {
+  fill: var(--warning);
+  stroke: var(--warning);
+}
+
+.checkbox-group { margin-bottom: 18px; }
+
+.checkbox-label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: var(--text) !important;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ===== 状态徽章（契约 §9.7 / IRON RULE：文字 + 图标 + 颜色） =====
+   结构由 index.html 提供槽位，内容由 render.js 的 statusBadge(status) 填充；
+   徽章内部始终同时容纳图标（.status-icon / .status-dot）与文字（.status-text）。 */
+.status-badge-slot { display: inline-flex; align-items: center; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.status-badge .status-icon,
+.status-badge svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.status-badge .status-text { display: inline-block; }
+
+/* 圆形状态点：与文字并存，作为图标的等效替代 */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: currentColor;
+  display: inline-block;
+}
+
+.status-badge.status-running {
+  color: var(--status-running);
+  background: rgba(47, 111, 235, 0.1);
+  border-color: rgba(47, 111, 235, 0.28);
+}
+
+.status-badge.status-paused {
+  color: var(--status-paused);
+  background: rgba(217, 119, 6, 0.1);
+  border-color: rgba(217, 119, 6, 0.28);
+}
+
+.status-badge.status-completed {
+  color: var(--status-completed);
+  background: rgba(22, 163, 74, 0.1);
+  border-color: rgba(22, 163, 74, 0.28);
+}
+
+.status-badge.status-abandoned {
+  color: var(--status-abandoned);
+  background: rgba(107, 114, 128, 0.1);
+  border-color: rgba(107, 114, 128, 0.28);
+}
+
+.status-badge.status-error {
+  color: var(--status-error);
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.28);
+}
+
+.status-badge .status-dot { background: currentColor; }
+
+/* 状态色的语义别名：供 render.js 的任意状态容器复用（颜色不单独承载语义） */
+.status-running { color: var(--status-running); }
+.status-paused { color: var(--status-paused); }
+.status-completed { color: var(--status-completed); }
+.status-abandoned { color: var(--status-abandoned); }
+.status-error { color: var(--status-error); }
+
+.status-badge.status-running .status-text,
+.status-badge.status-paused .status-text,
+.status-badge.status-completed .status-text,
+.status-badge.status-abandoned .status-text,
+.status-badge.status-error .status-text { color: inherit; }
+
+/* ===== 执行详情：进度条与清单（契约 §9.7 .checklist-item） ===== */
+.instance-progress { margin-bottom: 24px; }
+
+.instance-progress .progress-bar { height: 8px; border-radius: 4px; }
+
+.instance-progress .progress-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.instance-checklist { margin-bottom: 24px; }
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+
+.checklist-item:hover { background: var(--hover); }
+
+.checklist-item.done { opacity: 0.6; }
+
+.checklist-item.done .step-title { text-decoration: line-through; }
+
+.checklist-item .checklist-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--card-bg);
+  color: transparent;
+  transition: all var(--transition);
+}
+
+.checklist-item.done .checklist-check {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.checklist-sub {
+  margin-top: 8px;
+  padding-left: 16px;
+  border-left: 2px solid var(--border-light);
+}
+
+.instance-notes-group { margin-top: 8px; }
+
+.instance-notes-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: all var(--transition);
+  background: var(--card-bg);
+}
+
+.instance-notes-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* ===== 通用弹窗：确认 / 导入 ===== */
+.modal-sm { width: 440px; }
+
+.confirm-message {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.confirm-extra {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.import-summary {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.import-summary strong { color: var(--text); font-weight: 650; }
+
+.import-modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.radio-card {
+  display: block;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  background: var(--card-bg);
+  transition: all var(--transition);
+}
+
+.radio-card:hover { border-color: var(--primary-light); }
+
+.radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-card-body { display: flex; flex-direction: column; gap: 4px; }
+
+.radio-card-title { font-size: 13px; font-weight: 650; color: var(--text); }
+
+.radio-card-desc { font-size: 12px; color: var(--text-tertiary); line-height: 1.5; }
+
+.radio-card:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.radio-card:has(input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ===== Toast 提示（契约 §9.7 .toast / .toast-success / .toast-error / .toast-info） ===== */
+.toast-container,
+#toast-container {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 240px;
+  max-width: 380px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--text-tertiary);
+  pointer-events: auto;
+  animation: toastIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.toast .toast-icon,
+.toast svg { flex-shrink: 0; width: 16px; height: 16px; }
+
+.toast.toast-success { border-left-color: var(--status-completed); }
+.toast.toast-success .toast-icon,
+.toast.toast-success svg { color: var(--status-completed); }
+
+.toast.toast-error { border-left-color: var(--status-error); }
+.toast.toast-error .toast-icon,
+.toast.toast-error svg { color: var(--status-error); }
+
+.toast.toast-info { border-left-color: var(--status-running); }
+.toast.toast-info .toast-icon,
+.toast.toast-info svg { color: var(--status-running); }
+
+/* ===== 减少动效偏好 ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

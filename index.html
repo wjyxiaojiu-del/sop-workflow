@@ -14,9 +14,9 @@
       <span class="titlebar-title">SOP 工作流</span>
     </div>
     <div class="titlebar-controls">
-      <button class="titlebar-btn" id="btn-minimize"><svg width="12" height="12" viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5"/></svg></button>
-      <button class="titlebar-btn" id="btn-maximize"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
-      <button class="titlebar-btn btn-close" id="btn-close"><svg width="12" height="12" viewBox="0 0 12 12"><line x1="2" y1="2" x2="10" y2="10" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="2" x2="2" y2="10" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <button class="titlebar-btn" id="btn-minimize" type="button" aria-label="最小化"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <button class="titlebar-btn" id="btn-maximize" type="button" aria-label="最大化"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
+      <button class="titlebar-btn btn-close" id="btn-close" type="button" aria-label="关闭"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><line x1="2" y1="2" x2="10" y2="10" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="2" x2="2" y2="10" stroke="currentColor" stroke-width="1.5"/></svg></button>
     </div>
   </div>
 
@@ -24,23 +24,23 @@
     <!-- 侧边栏 -->
     <aside class="sidebar">
       <nav class="sidebar-nav">
-        <button class="nav-item active" data-view="templates">
-          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <button class="nav-item active" data-view="templates" type="button">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           <span>模板库</span>
         </button>
-        <button class="nav-item" data-view="instances">
-          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <button class="nav-item" data-view="instances" type="button">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <span>执行中</span>
           <span class="badge" id="running-badge" style="display:none">0</span>
         </button>
-        <button class="nav-item" data-view="history">
-          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
+        <button class="nav-item" data-view="history" type="button">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
           <span>历史记录</span>
         </button>
       </nav>
       <div class="sidebar-footer">
-        <button class="btn-new-sop" id="btn-new-template">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <button class="btn-new-sop" id="btn-new-template" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           新建 SOP 模板
         </button>
       </div>
@@ -48,77 +48,198 @@
 
     <!-- 主内容区 -->
     <main class="main-content">
-      <!-- 模板库视图 -->
+
+      <!-- ========== 首页 / 仪表盘视图 ========== -->
       <div class="view active" id="view-templates">
-        <div class="view-header">
-          <h1>SOP 模板库</h1>
-          <div class="search-box">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="search-templates" placeholder="搜索模板...">
+        <!-- 顶部工具区：搜索 + 新建模板 + 导入 + 导出 -->
+        <div class="view-header dash-header">
+          <h1>SOP 工作台</h1>
+          <div class="header-actions">
+            <div class="search-box">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="search-templates" placeholder="搜索模板、标签、步骤...">
+            </div>
+            <button class="btn-primary" id="btn-new-template-top" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              新建模板
+            </button>
+            <button class="btn-secondary" id="btn-import-data" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              导入
+            </button>
+            <button class="btn-secondary" id="btn-export-data" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              导出
+            </button>
           </div>
         </div>
-        <div class="template-grid" id="template-grid">
-          <div class="empty-state" id="templates-empty">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
-            <p>还没有 SOP 模板</p>
-            <p class="empty-hint">点击下方按钮开始创建你的第一个 SOP</p>
-          </div>
+
+        <!-- 从备份恢复提示条 -->
+        <div class="recovery-banner" id="recovery-banner" style="display:none" role="status">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="recovery-text">检测到主数据文件不可读，已从最近一次备份恢复。请检查最近的模板与执行记录是否完整。</span>
+          <button class="btn-dismiss-recovery" id="btn-dismiss-recovery" type="button" aria-label="关闭恢复提示">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </div>
+
+        <!-- 正在执行 -->
+        <section class="dash-section">
+          <div class="dash-section-header">
+            <h2>正在执行</h2>
+            <span class="dash-section-hint">暂停中的任务也会显示在这里</span>
+          </div>
+          <div class="dash-list" id="dash-running-list">
+            <div class="empty-state empty-state-compact" id="dash-running-empty">
+              <p>没有正在执行的 SOP</p>
+              <p class="empty-hint">在下方「全部模板」中选一个模板，点击「开始执行」即可</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 收藏 / 最近使用 -->
+        <section class="dash-section">
+          <div class="dash-section-header">
+            <h2>收藏 / 最近使用</h2>
+            <span class="dash-section-hint">最近用过的模板会自动出现在这里</span>
+          </div>
+          <div class="dash-list" id="dash-recent-list">
+            <div class="empty-state empty-state-compact" id="dash-recent-empty">
+              <p>还没有收藏或最近使用的模板</p>
+              <p class="empty-hint">在模板卡片上点击星标即可收藏常用 SOP</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 全部模板 -->
+        <section class="dash-section">
+          <div class="dash-section-header">
+            <h2>全部模板</h2>
+            <div class="dash-toolbar">
+              <div class="filter-chips" id="filter-chips" role="group" aria-label="模板筛选">
+                <button class="chip active" data-filter="all" type="button">全部</button>
+                <button class="chip" data-filter="favorite" type="button">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  收藏
+                </button>
+              </div>
+              <label class="select-wrap">
+                <span class="select-label">分类</span>
+                <select id="select-filter-category">
+                  <option value="">全部分类</option>
+                  <option value="科研">科研</option>
+                  <option value="学习">学习</option>
+                  <option value="开发">开发</option>
+                  <option value="生活">生活</option>
+                  <option value="其他">其他</option>
+                </select>
+              </label>
+              <label class="select-wrap">
+                <span class="select-label">排序</span>
+                <select id="select-sort-templates">
+                  <option value="recent">最近更新</option>
+                  <option value="lastUsed">最近使用</option>
+                  <option value="created">创建时间</option>
+                  <option value="name">名称</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="template-grid" id="template-grid">
+            <div class="empty-state" id="templates-empty">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="13" y2="13"/></svg>
+              <p>还没有 SOP，先创建一个模板</p>
+              <p class="empty-hint">点击上方「新建模板」从零开始，或用「导入」恢复已有的 SOP 数据</p>
+            </div>
+            <div class="empty-state" id="templates-empty-query" style="display:none">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <p>没有匹配「<span id="empty-query-text"></span>」的模板</p>
+              <p class="empty-hint">换个关键词，或清空搜索与筛选条件后再试</p>
+              <button class="btn-primary" id="btn-empty-new-template" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                新建模板
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 最近完成记录 -->
+        <section class="dash-section">
+          <div class="dash-section-header">
+            <h2>最近完成记录</h2>
+            <span class="dash-section-hint">完整历史见侧边栏「历史记录」</span>
+          </div>
+          <div class="dash-list" id="dash-history-list">
+            <div class="empty-state empty-state-compact" id="dash-history-empty">
+              <p>还没有完成记录</p>
+              <p class="empty-hint">完成或放弃一次执行后，记录会出现在这里</p>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <!-- 执行中视图 -->
+      <!-- ========== 执行中视图 ========== -->
       <div class="view" id="view-instances">
         <div class="view-header">
           <h1>执行中的 SOP</h1>
         </div>
         <div class="instances-list" id="instances-list">
           <div class="empty-state" id="instances-empty">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <p>没有正在执行的 SOP</p>
-            <p class="empty-hint">从模板库中选择一个模板开始执行</p>
+            <p class="empty-hint">回到「模板库」，选择一个模板点击「开始执行」</p>
           </div>
         </div>
       </div>
 
-      <!-- 历史记录视图 -->
+      <!-- ========== 历史记录视图 ========== -->
       <div class="view" id="view-history">
         <div class="view-header">
           <h1>历史记录</h1>
         </div>
         <div class="history-list" id="history-list">
           <div class="empty-state" id="history-empty">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.2" aria-hidden="true"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
             <p>暂无历史记录</p>
+            <p class="empty-hint">完成或放弃一次 SOP 执行后，记录会保留在这里</p>
           </div>
         </div>
       </div>
 
-      <!-- 模板详情/编辑视图 -->
+      <!-- ========== 模板详情视图 ========== -->
       <div class="view" id="view-template-detail">
         <div class="view-header">
-          <button class="btn-back" id="btn-back-templates">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <button class="btn-back" id="btn-back-templates" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             返回
           </button>
           <div class="detail-actions">
-            <div class="view-toggle" id="detail-view-toggle">
-              <button class="toggle-btn active" data-mode="list">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <div class="view-toggle" id="detail-view-toggle" role="group" aria-label="视图切换">
+              <button class="toggle-btn active" data-mode="list" type="button" aria-label="列表视图" title="列表视图">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
               </button>
-              <button class="toggle-btn" data-mode="flow">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="12" cy="19" r="3"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+              <button class="toggle-btn" data-mode="flow" type="button" aria-label="流程图视图" title="流程图视图">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><circle cx="12" cy="19" r="3"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
               </button>
             </div>
-            <button class="btn-secondary" id="btn-edit-template">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <button class="btn-favorite-toggle" id="detail-favorite-toggle" type="button" aria-pressed="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              收藏
+            </button>
+            <button class="btn-secondary" id="btn-duplicate-template" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制
+            </button>
+            <button class="btn-secondary" id="btn-edit-template" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               编辑
             </button>
-            <button class="btn-primary" id="btn-start-instance">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <button class="btn-primary" id="btn-start-instance" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               开始执行
             </button>
-            <button class="btn-danger" id="btn-delete-template">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <button class="btn-danger" id="btn-delete-template" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               删除
             </button>
           </div>
@@ -126,80 +247,207 @@
         <div class="template-detail" id="template-detail"></div>
       </div>
 
-      <!-- 执行详情视图 -->
+      <!-- ========== 执行详情视图 ========== -->
       <div class="view" id="view-instance-detail">
         <div class="view-header">
-          <button class="btn-back" id="btn-back-instances">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <button class="btn-back" id="btn-back-instances" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             返回
           </button>
           <div class="detail-actions">
-            <button class="btn-primary" id="btn-finish-instance">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <!-- 状态徽章槽位：render.js 用 SOPRender.statusBadge(status) 填充（文字 + 图标 + 颜色） -->
+            <div class="status-badge-slot" id="instance-status-badge">
+              <span class="status-badge status-running">
+                <svg class="status-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span class="status-text">执行中</span>
+              </span>
+            </div>
+            <div class="view-toggle" id="instance-mode-toggle" role="group" aria-label="执行视图切换">
+              <button class="toggle-btn active" data-mode="checklist" type="button" aria-label="清单模式" title="清单模式">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </button>
+              <button class="toggle-btn" data-mode="flow" type="button" aria-label="流程图模式" title="流程图模式">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><circle cx="12" cy="19" r="3"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+              </button>
+            </div>
+            <button class="btn-secondary" id="btn-pause-instance" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              暂停
+            </button>
+            <button class="btn-secondary" id="btn-resume-instance" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              继续
+            </button>
+            <button class="btn-primary" id="btn-finish-instance" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
               完成
             </button>
-            <button class="btn-danger" id="btn-abandon-instance">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <button class="btn-danger" id="btn-abandon-instance" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               放弃
             </button>
           </div>
         </div>
-        <div class="instance-detail" id="instance-detail"></div>
+        <div class="instance-detail" id="instance-detail">
+          <h2 id="instance-template-name"></h2>
+          <div class="instance-progress">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill" id="instance-progress-fill" style="width:0%"></div>
+            </div>
+            <div class="progress-text" id="instance-progress-text">0 / 0（0%）</div>
+          </div>
+          <!-- 清单执行模式容器：render.js 用 renderChecklist(instance) 填充 -->
+          <div class="instance-checklist" id="instance-checklist"></div>
+          <div class="form-group instance-notes-group">
+            <label for="instance-exec-notes">执行备注</label>
+            <textarea id="instance-exec-notes" rows="3" placeholder="记录本次执行的关键信息、遇到的问题或结论..."></textarea>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- 新建/编辑模板弹窗 -->
+  <!-- ========== 新建/编辑模板弹窗 ========== -->
   <div class="modal-overlay" id="modal-template" style="display:none">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-template-title">
       <div class="modal-header">
         <h3 id="modal-template-title">新建 SOP 模板</h3>
-        <button class="modal-close" id="modal-template-close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <button class="modal-close" id="modal-template-close" type="button" aria-label="关闭">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>模板名称</label>
+          <label for="input-template-name">模板名称</label>
           <input type="text" id="input-template-name" placeholder="例如：服务器部署流程">
         </div>
         <div class="form-group">
-          <label>描述</label>
+          <label for="input-template-desc">描述</label>
           <textarea id="input-template-desc" placeholder="简要描述这个 SOP 的用途..." rows="2"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-template-category">分类</label>
+            <select id="input-template-category">
+              <option value="科研">科研</option>
+              <option value="学习">学习</option>
+              <option value="开发">开发</option>
+              <option value="生活">生活</option>
+              <option value="其他" selected>其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-template-tags">标签</label>
+            <input type="text" id="input-template-tags" placeholder="用逗号分隔，例如：文献, 精读">
+          </div>
+        </div>
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label" for="input-template-favorite">
+            <input type="checkbox" id="input-template-favorite">
+            <span>加入收藏</span>
+          </label>
         </div>
         <div class="form-group">
           <label>步骤列表</label>
           <div class="steps-editor" id="steps-editor"></div>
-          <button class="btn-add-step" id="btn-add-step">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="btn-add-step" id="btn-add-step" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             添加步骤
           </button>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-secondary" id="btn-cancel-template">取消</button>
-        <button class="btn-primary" id="btn-save-template">保存</button>
+        <button class="btn-secondary" id="btn-cancel-template" type="button">取消</button>
+        <button class="btn-primary" id="btn-save-template" type="button">保存</button>
       </div>
     </div>
   </div>
 
-  <!-- 变量填写弹窗 -->
+  <!-- ========== 变量填写弹窗 ========== -->
   <div class="modal-overlay" id="modal-variables" style="display:none">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="填写变量">
       <div class="modal-header">
         <h3>填写变量</h3>
-        <button class="modal-close" id="modal-variables-close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <button class="modal-close" id="modal-variables-close" type="button" aria-label="关闭">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
       <div class="modal-body" id="variables-form"></div>
       <div class="modal-footer">
-        <button class="btn-secondary" id="btn-cancel-variables">取消</button>
-        <button class="btn-primary" id="btn-confirm-variables">开始执行</button>
+        <button class="btn-secondary" id="btn-cancel-variables" type="button">取消</button>
+        <button class="btn-primary" id="btn-confirm-variables" type="button">开始执行</button>
       </div>
     </div>
   </div>
 
+  <!-- ========== 通用确认弹窗 ========== -->
+  <div class="modal-overlay" id="modal-confirm" style="display:none">
+    <div class="modal modal-sm" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title" aria-describedby="modal-confirm-message">
+      <div class="modal-header">
+        <h3 id="modal-confirm-title">确认操作</h3>
+        <button class="modal-close" id="modal-confirm-close" type="button" aria-label="关闭">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="confirm-message" id="modal-confirm-message"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-confirm-cancel" type="button">取消</button>
+        <button class="btn-danger" id="btn-confirm-discard" type="button">直接退出</button>
+        <button class="btn-danger" id="btn-confirm-ok" type="button">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 导入弹窗 ========== -->
+  <div class="modal-overlay" id="modal-import" style="display:none">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="导入数据">
+      <div class="modal-header">
+        <h3>导入数据</h3>
+        <button class="modal-close" id="modal-import-close" type="button" aria-label="关闭">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="import-summary" id="import-summary"></div>
+        <div class="form-group">
+          <label>导入方式</label>
+          <div class="import-modes">
+            <label class="radio-card" for="import-mode-merge">
+              <input type="radio" name="import-mode" id="import-mode-merge" value="merge" checked>
+              <span class="radio-card-body">
+                <span class="radio-card-title">合并</span>
+                <span class="radio-card-desc">保留本地数据，同 id 以更新时间较新者为准</span>
+              </span>
+            </label>
+            <label class="radio-card" for="import-mode-replace">
+              <input type="radio" name="import-mode" id="import-mode-replace" value="replace">
+              <span class="radio-card-body">
+                <span class="radio-card-title">替换</span>
+                <span class="radio-card-desc">用导入文件完全覆盖本地数据，原有内容不可恢复</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-cancel-import" type="button">取消</button>
+        <button class="btn-primary" id="btn-confirm-import" type="button">确认导入</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Toast 容器 ========== -->
+  <div class="toast-container" id="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- 脚本加载顺序（契约 §1.3，必须严格保持） -->
+  <script src="core/utils.js"></script>
+  <script src="core/progress.js"></script>
+  <script src="core/template-service.js"></script>
+  <script src="core/instance-service.js"></script>
+  <script src="core/data-store.js"></script>
+  <script src="render.js"></script>
   <script src="renderer.js"></script>
 </body>
 </html>
