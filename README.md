@@ -28,7 +28,7 @@
 
 ### 从源码运行
 
-使用支持 `node:test` 的 Node.js 和 npm。本次本机验收使用 Node.js 24.18.0；CI 配置覆盖 Node.js 18 / 20 / 22，但尚未在远程运行。
+使用支持 `node:test` 的 Node.js 和 npm。本次本机验收使用 Node.js 24.18.0；CI 配置覆盖 Node.js 18 / 20 / 22，已随 2026-10-24 推送在远程全部通过。
 
 ```powershell
 npm install
